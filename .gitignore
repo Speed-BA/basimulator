@@ -1,14 +1,29 @@
-.gradle
-/build/
+/.idea/
+qg
+/.gradle/
+build/
+g=out/
+gen/
 
-# Ignore Gradle GUI config
-gradle-app.setting
+gradlew
+gradlew.bat
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+/data/saves/
+/data/rsa/
+/data/xteas.json
+/cfg/
+/plugins/
 
-# Cache of project
-.gradletasknamecache
+error.log
+modulus
 
-# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
+first-launch
+first-launch-example
+/game/plugins/src/main/kotlin/gg/rsmod/plugins/api/cfg/Items.kt
+/game/plugins/src/main/kotlin/gg/rsmod/plugins/api/cfg/Npcs.kt
+/game/plugins/src/main/kotlin/gg/rsmod/plugins/api/cfg/Objs.kt
+/game/plugins/src/main/kotlin/gg/rsmod/plugins/api/cfg/
+/game/plugins/src/main/kotlin/gg/rsmod/plugins/content/Testing
+/game.yml
+/dev-settings.yml
+
