@@ -12,11 +12,6 @@ Runner.RUNNER_NPCS.forEach { runner ->
         val npc = npc
         npc.timers[TARGET_FOOD_DELAY] = 5
     }
-
-    on_npc_death(npc = runner) {
-        val npc = npc
-        npc.animate(5103)
-    }
 }
 
 on_timer(TARGET_FOOD_DELAY) {
