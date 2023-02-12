@@ -1,13 +1,16 @@
 package gg.rsmod.plugins.content.npcs.runner
 
+/**
+ * Currently a proof of concept
+ * None of the real runner mechanics are implemented as of yet
+ */
+
 val TARGET_FOOD_DELAY = TimerKey()
-val KILL_RUNNER_PHASE_2 = TimerKey()
-var KILL_RUNNER_PHASE_1 = TimerKey()
 
 Runner.RUNNER_NPCS.forEach { runner ->
     on_npc_spawn(npc = runner) {
         val npc = npc
-        npc.timers[TARGET_FOOD_DELAY] = 6
+        npc.timers[TARGET_FOOD_DELAY] = 5
     }
 }
 
@@ -20,21 +23,17 @@ on_timer(TARGET_FOOD_DELAY) {
             runner.forceChat("Chomp!")
             runner.world.remove(foodOnGround)
             if ((runner.tile.x == 1901 || runner.tile.x == 1902 || runner.tile.x == 1900) && (runner.tile.z == 5475 || runner.tile.z == 5474 || runner.tile.z == 5473)) {
-                runner.timers[KILL_RUNNER_PHASE_1] = 2
+                runner.queue { kill_runner(this, runner) }
                 return@on_timer
             }
         }
     }
-    runner.timers[TARGET_FOOD_DELAY] = 6
+    runner.timers[TARGET_FOOD_DELAY] = 5
 }
 
-on_timer(KILL_RUNNER_PHASE_1) {
-    val runner = npc
-    runner.forceChat("Yikes!")
-    runner.timers[KILL_RUNNER_PHASE_2] = 4
-}
-
-on_timer(KILL_RUNNER_PHASE_2) {
-    val runner = npc
-    runner.world.remove(runner)
+suspend fun kill_runner(it: QueueTask, n: Npc) {
+    it.wait(1)
+    n.forceChat("Yikes!")
+    it.wait(1)
+    world.remove(n)
 }
