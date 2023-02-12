@@ -12,6 +12,11 @@ Runner.RUNNER_NPCS.forEach { runner ->
         val npc = npc
         npc.timers[TARGET_FOOD_DELAY] = 5
     }
+
+    on_npc_death(npc = runner) {
+        val npc = npc
+        npc.animate(5103)
+    }
 }
 
 on_timer(TARGET_FOOD_DELAY) {
@@ -34,6 +39,8 @@ on_timer(TARGET_FOOD_DELAY) {
 suspend fun kill_runner(it: QueueTask, n: Npc) {
     it.wait(1)
     n.forceChat("Yikes!")
+    it.wait(1)
+    n.animate(5102)
     it.wait(1)
     world.remove(n)
 }
