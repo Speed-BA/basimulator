@@ -1,5 +1,6 @@
 package gg.rsmod.game.message.handler
 
+import gg.rsmod.game.Server.Companion.logger
 import gg.rsmod.game.action.PawnPathAction
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.OpNpcUMessage
@@ -14,10 +15,13 @@ import java.lang.ref.WeakReference
 
 /**
  * @author Tom <rspsmods@gmail.com>
+ *
+ *     Does not work, check OpNpcTHandler for explanation
  */
 class OpNpcUHandler : MessageHandler<OpNpcUMessage> {
 
     override fun handle(client: Client, world: World, message: OpNpcUMessage) {
+        logger.info(message.toString())
         val index = message.npcIndex
         val npc = world.npcs[index] ?: return
 
