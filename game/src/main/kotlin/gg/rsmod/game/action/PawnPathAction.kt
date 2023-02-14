@@ -107,10 +107,11 @@ object PawnPathAction {
              * If the npc has moved from the time this queue was added to
              * when it was actually invoked, we need to walk towards it again.
              */
-            if (!other.tile.sameAs(initialTile)) {
-                walk(it, pawn, other, opt, lineOfSightRange)
-                return
-            }
+            // TODO: Commenting this out fixes tagging healers with food ?
+//            if (!other.tile.sameAs(initialTile)) {
+//                walk(it, pawn, other, opt, lineOfSightRange)
+//                return
+//            }
 
             if (other is Npc) {
 
@@ -119,23 +120,24 @@ object PawnPathAction {
                  * so if the last pawn that faced the player is still facing
                  * them, then we reset their face target.
                  */
-                pawn.attr[NPC_FACING_US_ATTR]?.get()?.let {
-                    if (it.attr[FACING_PAWN_ATTR]?.get() == pawn) {
-                        it.resetFacePawn()
-                        it.timers.remove(RESET_PAWN_FACING_TIMER)
-                    }
-                }
-                pawn.attr[NPC_FACING_US_ATTR] = WeakReference(other)
-
-                /*
-                 * Stop the npc from walking while the player talks to it
-                 * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
-                 */
-                other.stopMovement()
-                if (other.attr[FACING_PAWN_ATTR]?.get() != pawn) {
-                    other.facePawn(pawn)
-                    other.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
-                }
+//                pawn.attr[NPC_FACING_US_ATTR]?.get()?.let {
+//                    if (it.attr[FACING_PAWN_ATTR]?.get() == pawn) {
+//                        it.resetFacePawn()
+//                        it.timers.remove(RESET_PAWN_FACING_TIMER)
+//                    }
+//                }
+//                pawn.attr[NPC_FACING_US_ATTR] = WeakReference(other)
+//
+//                /*
+//                 * Stop the npc from walking while the player talks to it
+//                 * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
+//                 */
+//                // Penance Healer Check
+//                other.stopMovement()
+//                if (other.attr[FACING_PAWN_ATTR]?.get() != pawn) {
+//                    other.facePawn(pawn)
+//                    other.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
+//                }
 
                 val npcId = other.getTransform(pawn)
                 val handled = if (opt != ITEM_USE_OPCODE) {
