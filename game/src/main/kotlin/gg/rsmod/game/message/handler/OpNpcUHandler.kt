@@ -21,7 +21,6 @@ import java.lang.ref.WeakReference
 class OpNpcUHandler : MessageHandler<OpNpcUMessage> {
 
     override fun handle(client: Client, world: World, message: OpNpcUMessage) {
-        logger.info(message.toString())
         val index = message.npcIndex
         val npc = world.npcs[index] ?: return
 
