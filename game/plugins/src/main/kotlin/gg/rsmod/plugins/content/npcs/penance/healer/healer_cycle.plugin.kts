@@ -186,7 +186,7 @@ set_combat_def(Npcs.PENANCE_HEALER_5773) {
     }
 }
 
-// Wave 8
+// Wave 9
 set_combat_def(Npcs.PENANCE_HEALER_5774) {
     configs {
         attackSpeed = 100
