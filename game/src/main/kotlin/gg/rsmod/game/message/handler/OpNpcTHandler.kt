@@ -14,7 +14,6 @@ import java.lang.ref.WeakReference
 /**
  * @author Tom <rspsmods@gmail.com>
  *
- *
  *     This is a very bad hack, breaks manual casting spells on NPCs.
  *     If you're using this simulator, I assume you don't want to use mage in BA anyways...
  *     But ... TODO: Need to implement a real solution
@@ -32,8 +31,6 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         }
 
         val movementType = message.movementType
-        // val npcIndex = message.npcIndex
-        // val itemId = message.item
         val itemId = message.verify
         val itemSlot = message.componentSlot
 
@@ -59,39 +56,4 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         client.attr[INTERACTING_ITEM_SLOT] = itemSlot
         client.executePlugin(PawnPathAction.itemUsePlugin)
     }
-//    override fun handle(client: Client, world: World, message: OpNpcTMessage) {
-//        client.writeMessage(message.toString())
-//        val npc = world.npcs[message.npcIndex] ?: return
-//        val parent = message.componentHash shr 16
-//        val child = message.componentHash and 0xFFFF
-//
-//        if (!client.lock.canNpcInteract()) {
-//            return
-//        }
-//
-//        log(client, "Spell on npc: npc=%d. index=%d, component=[%d:%d], movement=%d", npc.id, message.npcIndex, parent, child, message.movementType)
-//
-//        client.interruptQueues()
-//        client.resetInteractions()
-//
-//        if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
-//            client.moveTo(world.findRandomTileAround(npc.tile, 1) ?: npc.tile)
-//        }
-//
-//        client.closeInterfaceModal()
-//        client.interruptQueues()
-//        client.resetInteractions()
-//
-//        client.attr[INTERACTING_NPC_ATTR] = WeakReference(npc)
-//        client.attr[INTERACTING_COMPONENT_PARENT] = parent
-//        client.attr[INTERACTING_COMPONENT_CHILD] = child
-//
-//        // TODO: add verification of active spellbook add in 196
-//        if (!world.plugins.executeSpellOnNpc(client, parent, child)) {
-//            client.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
-//            if (world.devContext.debugMagicSpells) {
-//                client.writeMessage("Unhandled magic spell: [$parent, $child]")
-//            }
-//        }
-//    }
 }
