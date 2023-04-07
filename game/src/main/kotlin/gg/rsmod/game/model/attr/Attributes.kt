@@ -115,6 +115,11 @@ val LAST_HIT_BY_ATTR = AttributeKey<WeakReference<Pawn>>()
 val POISON_TICKS_LEFT_ATTR = AttributeKey<Int>(persistenceKey = "poison_ticks_left", resetOnDeath = true)
 
 /**
+ * Alive timer
+ */
+val NPC_ALIVE_SINCE_ATTR = AttributeKey<Int>(persistenceKey = "time_alive", resetOnDeath = true)
+
+/**
  * The amount of antifire potion charges left.
  */
 val ANTIFIRE_POTION_CHARGES_ATTR = AttributeKey<Int>(persistenceKey = "antifire_potion_charges", resetOnDeath = true)

@@ -26,15 +26,16 @@ object Poison {
     }
 
     fun poison(pawn: Pawn, initialDamage: Int): Boolean {
-        val ticks = (initialDamage * 5) - 4
-        val oldDamage = getDamageForTicks(pawn.attr[POISON_TICKS_LEFT_ATTR] ?: 0)
-        val newDamage = getDamageForTicks(ticks)
-        if (oldDamage > newDamage) {
-            return false
-        }
-        pawn.timers[POISON_TIMER] = 1
-        pawn.attr[POISON_TICKS_LEFT_ATTR] = ticks
         return true
+//        val ticks = (initialDamage * 5) - 4
+//        val oldDamage = getDamageForTicks(pawn.attr[POISON_TICKS_LEFT_ATTR] ?: 0)
+//        val newDamage = getDamageForTicks(ticks)
+//        if (oldDamage > newDamage) {
+//            return false
+//        }
+//        pawn.timers[POISON_TIMER] = 1
+//        pawn.attr[POISON_TICKS_LEFT_ATTR] = ticks
+//        return true
     }
 
     fun setHpOrb(player: Player, state: OrbState) {

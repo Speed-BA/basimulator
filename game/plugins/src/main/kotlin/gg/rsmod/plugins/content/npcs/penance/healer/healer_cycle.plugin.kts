@@ -1,27 +1,64 @@
 package gg.rsmod.plugins.content.npcs.penance.healer
 
+import gg.rsmod.game.model.attr.NPC_ALIVE_SINCE_ATTR
+import gg.rsmod.plugins.content.mechanics.poison.poison
+
+fun poisonHealer(n: Npc, p: Player): () -> Unit = {
+    if (n.timers.isNotEmpty) {
+        n.timers.clear()
+    }
+
+    // Determine if the healer has been spawned for no more than 4t
+    if (world.currentCycle - n.attr[NPC_ALIVE_SINCE_ATTR]!! <= 4) {
+        p.message("Sending auto poison")
+        var autoPoisonTimer = TimerKey()
+        n.timers[autoPoisonTimer] = 2
+        on_timer(autoPoisonTimer) {
+            n.hit(4, HitType.POISON)
+        }
+    }
+
+    val poisonDelay = TimerKey()
+    var damageCount = 20
+    var poisonDamage = 4
+
+    n.timers[poisonDelay] = 0
+    on_timer(poisonDelay) {
+        if (damageCount % 5 == 0 && damageCount != 20) {
+            poisonDamage--
+        }
+        n.hit(poisonDamage, HitType.POISON)
+        damageCount--
+        n.timers[poisonDelay] = 5
+    }
+}
+
 Healer.HEALER_NPCS.forEach { healer ->
+    on_npc_spawn(npc = healer) {
+        npc.attr[NPC_ALIVE_SINCE_ATTR] = world.currentCycle
+    }
+
     on_item_on_npc(item = Items.POISONED_TOFU, npc = healer) {
         player.queue {
-            player.getInteractingNpc().hit(4, HitType.POISON)
+            val npc = player.getInteractingNpc()
+            npc.poison(4, poisonHealer(npc, player))
             player.inventory.remove(Items.POISONED_TOFU, 1)
-            wait(1)
         }
     }
 
     on_item_on_npc(item = Items.POISONED_WORMS, npc = healer) {
         player.queue {
-            player.getInteractingNpc().hit(4, HitType.POISON)
+            val npc = player.getInteractingNpc()
+            npc.poison(4, poisonHealer(npc, player))
             player.inventory.remove(Items.POISONED_WORMS, 1)
-            wait(1)
         }
     }
 
     on_item_on_npc(item = Items.POISONED_MEAT, npc = healer) {
         player.queue {
-            player.getInteractingNpc().hit(4, HitType.POISON)
+            val npc = player.getInteractingNpc()
+            npc.poison(4, poisonHealer(npc, player))
             player.inventory.remove(Items.POISONED_MEAT, 1)
-            wait(1)
         }
     }
 }

@@ -62,7 +62,7 @@ object PawnPathAction {
          *
          * Set to null for default interaction range.
          */
-        val lineOfSightRange = if (other is Npc) world.plugins.getNpcInteractionDistance(other.id) else null
+        val lineOfSightRange = null
 
         pawn.queue(TaskPriority.STANDARD) {
             terminateAction = {
@@ -82,7 +82,7 @@ object PawnPathAction {
 
         pawn.facePawn(other)
 
-        val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
+        val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 0, lineOfSight = lineOfSightRange != null)
         if (!pathFound) {
             pawn.movementQueue.clear()
             if (pawn is Player) {

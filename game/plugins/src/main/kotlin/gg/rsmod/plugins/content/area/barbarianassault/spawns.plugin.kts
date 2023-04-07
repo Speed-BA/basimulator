@@ -19,3 +19,4 @@ spawn_npc(npc= Npcs.PENANCE_HEALER_5769, x = 1898, z = 5485, walkRadius = 50, di
 spawn_npc(npc= Npcs.PENANCE_HEALER_5770, x = 1898, z = 5485, walkRadius = 50, direction = Direction.SOUTH)
 spawn_npc(npc= Npcs.PENANCE_FIGHTER_5739, x = 1880, z = 5486, walkRadius = 0, direction = Direction.SOUTH)
 spawn_npc(npc= Npcs.PENANCE_RANGER_5757, x = 1874, z = 5485, walkRadius = 0, direction = Direction.SOUTH)
+spawn_npc(npc= Npcs.PENANCE_HEALER_5770, x = 1903, z = 5479, walkRadius = 0, direction = Direction.SOUTH)
